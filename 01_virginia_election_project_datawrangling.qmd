@@ -1,6 +1,6 @@
 ---
 title: "Virginia Election Project"
-author: "putyournamehere"
+author: "Hannah Loder"
 execute:
   echo: true
 format:
@@ -331,7 +331,9 @@ Where should we go from here....? Give it a shot...
 
 
 ```{r}
-
+#save results to file for next step
+saveRDS(joined_vacomparison, here("processed_data", "joined_vacomparison.rds"))
+write_csv(joined_vacomparison, here("processed_data", "joined_vacomparison.csv"))
 
 
 ```
