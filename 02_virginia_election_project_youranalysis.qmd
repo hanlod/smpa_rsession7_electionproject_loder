@@ -9,7 +9,6 @@ format:
     code-tools: true
 ---
 
-
 ```{r setup, include=FALSE, warning=FALSE, message=FALSE}
 
 
@@ -28,10 +27,7 @@ joined_vacomparison <- readRDS(here("processed_data", "joined_vacomparison.rds")
 
 ```
 
-
-# Comparing Virgnia Gov vs. Prez
-
-
+# Comparing Virginia Gov vs. Prez
 
 ```{r}
 
@@ -39,3 +35,88 @@ head(joined_vacomparison)
 
 
 ```
+
+
+
+## Mapping the Percent Democrat Across Both Races:
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(tigris)
+library(sf)
+library(tidycensus)
+library(htmltools)
+library(janitor)
+library(here)
+library(mapview)
+library(leafsync)
+library(leaflet.extras2)
+library(stringr)
+options(tigris_class = "sf")
+
+
+```
+
+```{r}
+
+census_api_key("2a6f8c21a30d3024e038d67d7d4eba647dc79cd4", install=TRUE, overwrite=TRUE)
+
+```
+
+```{r}
+myvars <- c(totalpop = "B01003_001",
+            medincome = "B19013_001",
+            medage = "B01002_001")
+```
+
+```{r}
+va_counties_withgeo <- get_acs(geography = "county",
+                       variables = c(myvars),
+                       state = "VA",
+                       output = "wide",
+                       geometry = TRUE)
+
+va_counties_withgeo
+
+```
+
+```{r}
+
+  names(va_counties_withgeo)[2] = "locality"
+
+va_counties_withgeo
+```
+
+```{r}
+va_counties_withgeo <- va_counties_withgeo %>% 
+  select(locality)
+```
+
+```{r}
+va_counties_withgeo %>% 
+  
+```
+
+
+```{r}
+joined_vacomparison_withgeo <- inner_join(joined_vacomparison, va_counties_withgeo, by = )
+```
+
+```{r}
+joined_vacomparison_withgeo <- joined_vacomparison_withgeo %>%
+  select(-ends_with("M"))
+
+```
+
+```{r}
+colnames(joined_vacomparison_withgeo) <- sub("E$", "", colnames(joined_vacomparison_withgeo)) 
+
+joined_vacomparison_withgeo
+```
+
+```{r}
+mapview(joined_vacomparison_withgeo)
+```
+
