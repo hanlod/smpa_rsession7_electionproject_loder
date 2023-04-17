@@ -325,7 +325,32 @@ Where should we go from here....? Give it a shot...
 
 ```{r}
 
+joined_vacomparison <- joined_vacomparison %>% 
+  mutate(youngkin_overperform = pct_youngkin - trump_pct)
 
+```
+
+
+```{r}
+
+joined_vacomparison <- joined_vacomparison %>% 
+  mutate(mcauliffe_overperform = pct_mcauliffe - biden_pct)
+
+```
+
+
+```{r}
+
+joined_vacomparison <- joined_vacomparison %>% 
+  mutate(avg_pct_democrat = (biden_pct + pct_mcauliffe) / 2)
+
+```
+
+
+```{r}
+
+joined_vacomparison <- joined_vacomparison %>% 
+  mutate(avg_pct_republican = (trump_pct + pct_youngkin) / 2)
 
 ```
 
@@ -334,27 +359,6 @@ Where should we go from here....? Give it a shot...
 #save results to file for next step
 saveRDS(joined_vacomparison, here("processed_data", "joined_vacomparison.rds"))
 write_csv(joined_vacomparison, here("processed_data", "joined_vacomparison.csv"))
-
-
-```
-
-
-```{r}
-
-
-
-```
-
-
-```{r}
-
-
-
-```
-
-
-```{r}
-
 
 
 ```
