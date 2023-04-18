@@ -338,6 +338,12 @@ joined_vacomparison <- joined_vacomparison %>%
 
 ```
 
+```{r}
+
+joined_vacomparison <- joined_vacomparison %>% 
+  mutate(biden_overperform = biden_pct - pct_mcauliffe)
+
+```
 
 ```{r}
 
