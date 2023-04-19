@@ -18,6 +18,17 @@ library(kableExtra)
 library(here)
 options(scipen = 999)
 options(stringsAsFactors = FALSE)
+library(tidyverse)
+library(tigris)
+library(sf)
+library(tidycensus)
+library(htmltools)
+library(janitor)
+library(here)
+library(mapview)
+library(leafsync)
+library(leaflet.extras2)
+options(tigris_class = "sf")
 
 
 #load saved joined data file from previous script
@@ -82,4 +93,3 @@ ggplot(toptencounties_BO, aes(x = locality, y = biden_overperform)) +
        caption = "VA Department of Elections") +
   theme_fivethirtyeight()
 ```
-
